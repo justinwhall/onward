@@ -1,36 +1,89 @@
-import { getProduct } from '@/services';
-import { addWeeks, subMonths } from 'date-fns';
-import format from 'date-fns/format';
+import {
+  C_BUCKET_TOO_BIG,
+  EMPTY_A,
+  EVEN_BUCKETS,
+  FILL_A,
+  FILL_B,
+  POUR_INTO_A,
+  POUR_INTO_B,
+} from '@/constants';
+import { calculateSteps } from '@/services';
 
-const today = new Date();
-const bornToday = format(today, 'yyyy-MM-dd');
-const oneWeekInFuture = format(addWeeks(today, 1), 'yyyy-MM-dd');
-const threeMonthOld = format(subMonths(today, 3), 'yyyy-MM-dd');
-const tenMonthOld = format(subMonths(today, 10), 'yyyy-MM-dd');
-const twelveMonthOld = format(subMonths(today, 12), 'yyyy-MM-dd');
-
-describe('getBirthDateRangeForProduct()', () => {
-  it('finds correct product for a child born today', () => {
-    const product = getProduct(bornToday);
-    expect(product?.id).toBe(1);
+describe('calculateSteps()', () => {
+  it('should find the most efficient steps to get 4 units of water with containers of sizes 3 and 5', () => {
+    const result = calculateSteps(3, 5, 4);
+    expect(result).toEqual([
+      {
+        containerA: 0,
+        containerB: 5,
+        desc: FILL_B,
+      },
+      {
+        containerA: 3,
+        containerB: 2,
+        desc: POUR_INTO_A,
+      },
+      {
+        containerA: 0,
+        containerB: 2,
+        desc: EMPTY_A,
+      },
+      {
+        containerA: 2,
+        containerB: 0,
+        desc: POUR_INTO_A,
+      },
+      {
+        containerA: 2,
+        containerB: 5,
+        desc: FILL_B,
+      },
+      {
+        containerA: 3,
+        containerB: 4,
+        desc: POUR_INTO_A,
+      },
+    ]);
   });
-  it('finds correct product for a child born in the future', () => {
-    const product = getProduct(oneWeekInFuture);
-    expect(product?.id).toBe(1);
+
+  it('should find the most efficient steps to get 2 units of water with containers of sizes 1 and 10', () => {
+    const result = calculateSteps(1, 10, 2);
+    expect(result).toEqual([
+      {
+        containerA: 1,
+        containerB: 0,
+        desc: FILL_A,
+      },
+      {
+        containerA: 0,
+        containerB: 1,
+        desc: POUR_INTO_B,
+      },
+      {
+        containerA: 1,
+        containerB: 1,
+        desc: FILL_A,
+      },
+      {
+        containerA: 0,
+        containerB: 2,
+        desc: POUR_INTO_B,
+      },
+    ]);
   });
 
-  it('finds correct product for a three month old', () => {
-    const product = getProduct(threeMonthOld);
-    expect(product?.id).toBe(2);
+  it('should return and error that the C bucket is too large to solve for', () => {
+    const result = calculateSteps(1, 10, 20);
+    expect(result).toEqual({ error: C_BUCKET_TOO_BIG });
   });
 
-  it('finds correct product for a ten month old', () => {
-    const product = getProduct(tenMonthOld);
-    expect(product?.id).toBe(6);
+  it('should return and error that two even buckets can not result in an odd answer', () => {
+    const result = calculateSteps(2, 10, 3);
+    expect(result).toEqual({ error: EVEN_BUCKETS });
   });
 
-  it('finds correct product for a twelve month old', () => {
-    const product = getProduct(twelveMonthOld);
-    expect(product?.id).toBe(undefined);
+  it('should return and C cannot be solved', () => {
+    const result = calculateSteps(3, 6, 2);
+    expect(result).toEqual({ error: EVEN_BUCKETS });
   });
 });

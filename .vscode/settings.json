@@ -1,9 +1,8 @@
-
 {
     "eslint.options": {
-        "overrideConfigFile": "/Users/justin/Sites/lovevery/.eslintrc.json"
+        "overrideConfigFile": "/Users/jwindhall/Sites/onward/.eslintrc.json"
     },
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
-      },
+    },
 }
