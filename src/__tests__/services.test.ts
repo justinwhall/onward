@@ -1,7 +1,6 @@
 import {
-  C_BUCKET_TOO_BIG,
   EMPTY_A,
-  EVEN_BUCKETS,
+  ERROR_MAP,
   FILL_A,
   FILL_B,
   POUR_INTO_A,
@@ -74,16 +73,16 @@ describe('calculateSteps()', () => {
 
   it('should return and error that the C bucket is too large to solve for', () => {
     const result = calculateSteps(1, 10, 20);
-    expect(result).toEqual({ error: C_BUCKET_TOO_BIG });
+    expect(result).toEqual({ error: ERROR_MAP.C_BUCKET_TOO_BIG });
   });
 
   it('should return and error that two even buckets can not result in an odd answer', () => {
     const result = calculateSteps(2, 10, 3);
-    expect(result).toEqual({ error: EVEN_BUCKETS });
+    expect(result).toEqual({ error: ERROR_MAP.EVEN_BUCKETS });
   });
 
   it('should return and C cannot be solved', () => {
     const result = calculateSteps(3, 6, 2);
-    expect(result).toEqual({ error: EVEN_BUCKETS });
+    expect(result).toEqual({ error: ERROR_MAP.DEFAULT });
   });
 });
