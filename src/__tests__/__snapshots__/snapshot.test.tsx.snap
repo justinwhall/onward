@@ -3,91 +3,42 @@
 exports[`renders homepage unchanged 1`] = `
 <div>
   <div
-    class="css-crhxnd"
-  >
-    <div
-      class="css-74sqfz"
-    >
-      <p
-        class="chakra-text link css-0"
-      >
-        Shop
-      </p>
-      <p
-        class="chakra-text link css-0"
-      >
-        About Us
-      </p>
-    </div>
-    <div
-      class="css-xf0e8f"
-    >
-      <p
-        class="chakra-text link css-0"
-      >
-        Help
-      </p>
-      <p
-        class="chakra-text link css-0"
-      >
-        Sign In
-      </p>
-      <p
-        class="chakra-text link css-0"
-      >
-        Cart
-         
-        <span
-          class="css-qpbr5m"
-        >
-          0
-        </span>
-      </p>
-    </div>
-  </div>
-  <div
     class="chakra-container css-10amnhh"
   >
-    <div
-      class="css-1e6a7qd"
-    >
-      <div>
-        <h1
-          class="chakra-heading css-1itv5e3"
-        >
-          Find a Product
-        </h1>
-        <div
-          class="css-1ad4jh8"
-        >
-          <div
-            class="chakra-form-control css-0"
-            role="group"
-          >
-            <label
-              class="chakra-form__label css-uvho5g"
-              for="childBirthDate"
-              id="field-:r0:-label"
-            >
-              Birth date/due date
-            </label>
-            <input
-              class="chakra-input css-vv14di"
-              id="field-:r0:"
-              name="childBirthDate"
-              placeholder="Select Date and Time"
-              type="date"
-            />
-          </div>
-          <button
-            class="chakra-button css-v4kllz"
-            type="button"
-          >
-            Find Product
-          </button>
-        </div>
-      </div>
-    </div>
+    <form>
+      <label>
+        Container A size:
+        <input
+          name="sizeA"
+          required=""
+          type="number"
+        />
+      </label>
+      <br />
+      <label>
+        Container B size:
+        <input
+          name="sizeB"
+          required=""
+          type="number"
+        />
+      </label>
+      <br />
+      <label>
+        Target amount:
+        <input
+          name="target"
+          required=""
+          type="number"
+        />
+      </label>
+      <br />
+      <button
+        type="submit"
+      >
+        Solve
+      </button>
+    </form>
   </div>
 </div>
 `;
