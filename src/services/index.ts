@@ -8,16 +8,11 @@ import {
   POUR_INTO_B,
   ERROR_MAP,
 } from '@/constants';
-import { error } from 'console';
 
 interface InitialState {
   containerA: number;
   containerB: number;
   steps: ISteps[];
-}
-
-interface Error {
-  error: string;
 }
 
 /**

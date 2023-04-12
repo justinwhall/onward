@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { Loader } from '@/components/loader';
 import { useCallback, useEffect, useState } from 'react';
 import { calculateSteps } from '@/services';
 import {
@@ -39,7 +38,7 @@ export default function Home(): JSX.Element {
     return true;
   }, [form]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const isValid = validateForm();
     if (!isValid) return;
@@ -52,6 +51,7 @@ export default function Home(): JSX.Element {
 
     if (res?.error) {
       setError(res?.error);
+      setSteps([]);
       return;
     }
 
@@ -61,9 +61,9 @@ export default function Home(): JSX.Element {
 
   useEffect(() => {
     const inputs = Object.keys(form).filter((key: string) => form[key].length > 0);
-    const newErrors = formErrors.filter((error) => !inputs.includes(error));
+    const newErrors = formErrors.filter((err: string) => !inputs.includes(err));
     setFormErrors(newErrors);
-  }, [form]);
+  }, [form, formErrors]);
 
   return (
     <>

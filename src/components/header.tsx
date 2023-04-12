@@ -1,4 +1,4 @@
-import { Box, Show, Text } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 
 export function Header(): JSX.Element {
   return (
