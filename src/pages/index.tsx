@@ -1,33 +1,69 @@
 import Head from 'next/head';
 import { Loader } from '@/components/loader';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { calculateSteps } from '@/services';
 import {
   Button,
   FormControl,
+  FormErrorMessage,
+  FormHelperText,
   FormLabel,
   Heading,
   NumberDecrementStepper,
   NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, SimpleGrid,
 } from '@chakra-ui/react';
 import { Steps } from '@/components/steps';
+import { Error } from '@/components/error';
 import Layout from './layout';
 
+interface Form {
+  [key: string]: string;
+}
+
 export default function Home(): JSX.Element {
-  const [containerA, setContainerA] = useState(0);
-  const [containerB, setContainerB] = useState(0);
-  const [targetAmount, setTargetAmount] = useState(0);
-  const [steps, setSteps] = useState([]);
+  const [error, setError] = useState<string | false>(false);
+  const [formErrors, setFormErrors] = useState<string[]>([]);
+  const [steps, setSteps] = useState<ISteps[]>([]);
+  const [form, setForm] = useState<Form>({
+    A: '',
+    B: '',
+    C: '',
+  });
+
+  const validateForm = useCallback(() => {
+    const inputErrors = Object.keys(form).filter((key: string) => form[key].length === 0);
+    setFormErrors(inputErrors);
+    if (inputErrors.length > 0) {
+      return false;
+    }
+    return true;
+  }, [form]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const isValid = validateForm();
+    if (!isValid) return;
+
     const res = calculateSteps(
-      parseInt(e.target[0].value, 10),
-      parseInt(e.target[1].value, 10),
-      parseInt(e.target[2].value, 10),
+      parseInt(form.A, 10),
+      parseInt(form.B, 10),
+      parseInt(form.C, 10),
     );
-    setSteps(res);
+
+    if (res?.error) {
+      setError(res?.error);
+      return;
+    }
+
+    setError(false);
+    setSteps(res.steps);
   };
+
+  useEffect(() => {
+    const inputs = Object.keys(form).filter((key: string) => form[key].length > 0);
+    const newErrors = formErrors.filter((error) => !inputs.includes(error));
+    setFormErrors(newErrors);
+  }, [form]);
 
   return (
     <>
@@ -40,54 +76,49 @@ export default function Home(): JSX.Element {
         <Heading mb={6}>Water Bucketer 3000</Heading>
         <div>
           <form onSubmit={handleSubmit}>
-            <FormControl>
-              <SimpleGrid columns={3} spacing={10}>
-                <div>
-                  <FormLabel htmlFor="bucketa">Bucket A</FormLabel>
-
-                  <NumberInput name="bucketa">
-                    <NumberInputField />
-                    <NumberInputStepper>
-                      <NumberIncrementStepper />
-                      <NumberDecrementStepper />
-                    </NumberInputStepper>
-                  </NumberInput>
+            <SimpleGrid columns={3} spacing={10}>
+              {['A', 'B', 'C'].map((bucket) => (
+                <div key={bucket}>
+                  <FormControl isInvalid={formErrors.includes(bucket)}>
+                    <FormLabel htmlFor={bucket}>
+                      Bucket
+                      {' '}
+                      {bucket}
+                    </FormLabel>
+                    <NumberInput
+                      name={bucket}
+                      onChange={(val) => setForm({ ...form, [bucket]: val })}
+                    >
+                      <NumberInputField />
+                      <NumberInputStepper>
+                        <NumberIncrementStepper />
+                        <NumberDecrementStepper />
+                      </NumberInputStepper>
+                    </NumberInput>
+                    {!formErrors.includes(bucket) ? (
+                      <FormHelperText>
+                        {bucket === 'C' ? 'Target units' : '# of units in the bucket.'}
+                      </FormHelperText>
+                    ) : (
+                      <FormErrorMessage>Field is required.</FormErrorMessage>
+                    )}
+                  </FormControl>
                 </div>
-                <div>
-                  <FormLabel htmlFor="bucketb">Bucket B</FormLabel>
-
-                  <NumberInput name="bucketb">
-                    <NumberInputField />
-                    <NumberInputStepper>
-                      <NumberIncrementStepper />
-                      <NumberDecrementStepper />
-                    </NumberInputStepper>
-                  </NumberInput>
-                </div>
-                <div>
-                  <FormLabel htmlFor="bucketc">Bucket C</FormLabel>
-                  <NumberInput name="bucketc">
-                    <NumberInputField />
-                    <NumberInputStepper>
-                      <NumberIncrementStepper />
-                      <NumberDecrementStepper />
-                    </NumberInputStepper>
-                  </NumberInput>
-                </div>
-              </SimpleGrid>
-              <Button
-                variant="solid"
-                size="lg"
-                type="submit"
-                background="blue"
-                color="white"
-                mt={6}
-              >
-                Solve for C
-              </Button>
-            </FormControl>
+              ))}
+            </SimpleGrid>
+            <Button
+              variant="solid"
+              size="lg"
+              type="submit"
+              background="blue"
+              color="white"
+              mt={6}
+            >
+              Solve for C
+            </Button>
           </form>
         </div>
+        {error && <Error error={error} />}
         <Steps steps={steps} />
       </Layout>
     </>

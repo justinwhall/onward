@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import {
-  EEMPTY_B,
+  EMPTY_B,
   EMPTY_A,
   FILL_A,
   FILL_B,
@@ -8,6 +8,7 @@ import {
   POUR_INTO_B,
   ERROR_MAP,
 } from '@/constants';
+import { error } from 'console';
 
 interface InitialState {
   containerA: number;
@@ -49,11 +50,15 @@ function bucketsAreValid(sizeA: number, sizeB: number, target: number): true | s
  * @param target the target number of units to be derived from A and B
  * @returns steps to get the target number or error message
  */
-export function calculateSteps(sizeA: number, sizeB: number, target: number): ISteps[] | Error {
+export function calculateSteps(
+  sizeA: number,
+  sizeB: number,
+  target: number,
+): { steps: ISteps[], error: string | false } {
   // Check that the buckets are valid
   const isValid = bucketsAreValid(sizeA, sizeB, target);
   if (isValid !== true) {
-    return { error: isValid };
+    return { steps: [], error: isValid };
   }
   // Create the initial state
   const initialState: InitialState = {
@@ -73,7 +78,10 @@ export function calculateSteps(sizeA: number, sizeB: number, target: number): IS
 
     // Check if the target amount is reached
     if (containerA === target || containerB === target) {
-      return steps.map((step) => ({ ...step, id: uuidv4() }));
+      return {
+        steps: steps.map((step) => ({ ...step, id: uuidv4() })),
+        error: false,
+      };
     }
 
     // Generate the next states
@@ -96,7 +104,7 @@ export function calculateSteps(sizeA: number, sizeB: number, target: number): IS
       {
         containerA,
         containerB: 0,
-        desc: EEMPTY_B,
+        desc: EMPTY_B,
       },
       {
         containerA: containerA - Math.min(containerA, sizeB - containerB),
@@ -119,5 +127,5 @@ export function calculateSteps(sizeA: number, sizeB: number, target: number): IS
     });
   }
 
-  return { error: ERROR_MAP.DEFAULT };
+  return { error: ERROR_MAP.DEFAULT, steps: [] };
 }

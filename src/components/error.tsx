@@ -1,17 +1,21 @@
 import { Badge, Box } from '@chakra-ui/react';
 
-export function Error(): JSX.Element {
+export function Error({ error }: { error: string }): JSX.Element {
   return (
     <Box
       sx={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '90vh',
+        marginTop: 20,
       }}
     >
       <div>
-        <Badge colorScheme="red">Sorry, we hit a snag. Try again later.</Badge>
+        <Badge colorScheme="red">
+          Error,
+          {' '}
+          {error}
+        </Badge>
       </div>
     </Box>
   );

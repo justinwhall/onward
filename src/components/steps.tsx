@@ -1,5 +1,5 @@
 import {
-  EEMPTY_B, EMPTY_A, FILL_A, FILL_B, POUR_INTO_A, POUR_INTO_B,
+  EMPTY_B, EMPTY_A, FILL_A, FILL_B, POUR_INTO_A, POUR_INTO_B,
 } from '@/constants';
 import {
   Box, Card, CardBody, Heading, Icon, Table, TableContainer, Tbody, Td, Th, Thead, Tr,
@@ -45,7 +45,7 @@ const StepMap: { [key: string]: Function } = {
       <Icon as={BsBucket} />
     </>
   ),
-  [EEMPTY_B]: () => (
+  [EMPTY_B]: () => (
     <>
       <Icon as={BsWater} />
       <Box as="span">Empty B →</Box>
