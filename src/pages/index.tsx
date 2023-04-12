@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useCallback, useEffect, useState } from 'react';
-import { calculateSteps } from '@/services';
 import {
   Button,
   FormControl,
@@ -20,6 +19,7 @@ interface Form {
 }
 
 export default function Home(): JSX.Element {
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | false>(false);
   const [formErrors, setFormErrors] = useState<string[]>([]);
   const [steps, setSteps] = useState<ISteps[]>([]);
@@ -38,25 +38,35 @@ export default function Home(): JSX.Element {
     return true;
   }, [form]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const isValid = validateForm();
     if (!isValid) return;
 
-    const res = calculateSteps(
-      parseInt(form.A, 10),
-      parseInt(form.B, 10),
-      parseInt(form.C, 10),
-    );
+    setError(false);
+    setLoading(true);
+    let data = [];
 
-    if (res?.error) {
-      setError(res?.error);
-      setSteps([]);
-      return;
+    try {
+      const res = await fetch('/api/solution', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+      data = await res.json();
+
+      if (data?.error) {
+        setError(data?.error);
+        setSteps([]);
+      }
+    } catch {
+      setError('Something went wrong. Please try again.');
     }
 
-    setError(false);
-    setSteps(res.steps);
+    setSteps(data?.steps || []);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -107,6 +117,7 @@ export default function Home(): JSX.Element {
               ))}
             </SimpleGrid>
             <Button
+              isLoading={loading}
               variant="solid"
               size="lg"
               type="submit"
