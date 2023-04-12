@@ -1,8 +1,7 @@
+import { v4 as uuidv4 } from 'uuid';
 import {
-  C_BUCKET_TOO_BIG,
   EEMPTY_B,
   EMPTY_A,
-  EVEN_BUCKETS,
   FILL_A,
   FILL_B,
   POUR_INTO_A,
@@ -20,6 +19,14 @@ interface Error {
   error: string;
 }
 
+/**
+ * Given the size of two buckets and a target number,
+ * wether the buckets can be used to get the target number
+ * @param sizeA number of units in bucket A
+ * @param sizeB number of units in bucket B
+ * @param target the target number of units to be derived from A and B
+ * @returns true if inputs are valid, error message otherwise
+ */
 function bucketsAreValid(sizeA: number, sizeB: number, target: number): true | string {
   // Check that target is not too big
   if (target > (sizeA + sizeB)) {
@@ -34,6 +41,14 @@ function bucketsAreValid(sizeA: number, sizeB: number, target: number): true | s
   return true;
 }
 
+/**
+ * Given the size of two buckets and a target number,
+ * calculate the steps to get the target number
+ * @param sizeA number of units in bucket A
+ * @param sizeB number of units in bucket B
+ * @param target the target number of units to be derived from A and B
+ * @returns steps to get the target number or error message
+ */
 export function calculateSteps(sizeA: number, sizeB: number, target: number): ISteps[] | Error {
   // Check that the buckets are valid
   const isValid = bucketsAreValid(sizeA, sizeB, target);
@@ -58,7 +73,7 @@ export function calculateSteps(sizeA: number, sizeB: number, target: number): IS
 
     // Check if the target amount is reached
     if (containerA === target || containerB === target) {
-      return steps;
+      return steps.map((step) => ({ ...step, id: uuidv4() }));
     }
 
     // Generate the next states
@@ -104,6 +119,5 @@ export function calculateSteps(sizeA: number, sizeB: number, target: number): IS
     });
   }
 
-  // Return empty array if no solution is found
   return { error: ERROR_MAP.DEFAULT };
 }

@@ -3,42 +3,230 @@
 exports[`renders homepage unchanged 1`] = `
 <div>
   <div
-    class="chakra-container css-10amnhh"
+    class="chakra-container css-1u8w7me"
   >
-    <form>
-      <label>
-        Container A size:
-        <input
-          name="sizeA"
-          required=""
-          type="number"
-        />
-      </label>
-      <br />
-      <label>
-        Container B size:
-        <input
-          name="sizeB"
-          required=""
-          type="number"
-        />
-      </label>
-      <br />
-      <label>
-        Target amount:
-        <input
-          name="target"
-          required=""
-          type="number"
-        />
-      </label>
-      <br />
-      <button
-        type="submit"
-      >
-        Solve
-      </button>
-    </form>
+    <h2
+      class="chakra-heading css-jmbq56"
+    >
+      Water Bucketer 3000
+    </h2>
+    <div>
+      <form>
+        <div
+          class="chakra-form-control css-0"
+          role="group"
+        >
+          <div
+            class="css-r4fmck"
+          >
+            <div>
+              <label
+                class="chakra-form__label css-uvho5g"
+                for="bucketa"
+                id="field-:r0:-label"
+              >
+                Bucket A
+              </label>
+              <div
+                class="chakra-numberinput css-e69dqy"
+              >
+                <input
+                  aria-readonly="false"
+                  aria-required="false"
+                  aria-valuemax="9007199254740991"
+                  aria-valuemin="-9007199254740991"
+                  autocomplete="off"
+                  autocorrect="off"
+                  class="chakra-numberinput__field css-8atqhb"
+                  id="field-:r0:"
+                  inputmode="decimal"
+                  name="bucketa"
+                  pattern="[0-9]*(.[0-9]+)?"
+                  role="spinbutton"
+                  type="text"
+                  value=""
+                />
+                <div
+                  aria-hidden="true"
+                  class="css-1j80trz"
+                >
+                  <div
+                    class="css-8bep6f"
+                    role="button"
+                    tabindex="-1"
+                  >
+                    <svg
+                      class="chakra-icon css-onkibi"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12.8,5.4c-0.377-0.504-1.223-0.504-1.6,0l-9,12c-0.228,0.303-0.264,0.708-0.095,1.047 C2.275,18.786,2.621,19,3,19h18c0.379,0,0.725-0.214,0.895-0.553c0.169-0.339,0.133-0.744-0.095-1.047L12.8,5.4z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    class="css-8bep6f"
+                    role="button"
+                    tabindex="-1"
+                  >
+                    <svg
+                      class="chakra-icon css-onkibi"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M21,5H3C2.621,5,2.275,5.214,2.105,5.553C1.937,5.892,1.973,6.297,2.2,6.6l9,12 c0.188,0.252,0.485,0.4,0.8,0.4s0.611-0.148,0.8-0.4l9-12c0.228-0.303,0.264-0.708,0.095-1.047C21.725,5.214,21.379,5,21,5z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label
+                class="chakra-form__label css-uvho5g"
+                for="bucketb"
+                id="field-:r0:-label"
+              >
+                Bucket B
+              </label>
+              <div
+                class="chakra-numberinput css-e69dqy"
+              >
+                <input
+                  aria-readonly="false"
+                  aria-required="false"
+                  aria-valuemax="9007199254740991"
+                  aria-valuemin="-9007199254740991"
+                  autocomplete="off"
+                  autocorrect="off"
+                  class="chakra-numberinput__field css-8atqhb"
+                  id="field-:r0:"
+                  inputmode="decimal"
+                  name="bucketb"
+                  pattern="[0-9]*(.[0-9]+)?"
+                  role="spinbutton"
+                  type="text"
+                  value=""
+                />
+                <div
+                  aria-hidden="true"
+                  class="css-1j80trz"
+                >
+                  <div
+                    class="css-8bep6f"
+                    role="button"
+                    tabindex="-1"
+                  >
+                    <svg
+                      class="chakra-icon css-onkibi"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12.8,5.4c-0.377-0.504-1.223-0.504-1.6,0l-9,12c-0.228,0.303-0.264,0.708-0.095,1.047 C2.275,18.786,2.621,19,3,19h18c0.379,0,0.725-0.214,0.895-0.553c0.169-0.339,0.133-0.744-0.095-1.047L12.8,5.4z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    class="css-8bep6f"
+                    role="button"
+                    tabindex="-1"
+                  >
+                    <svg
+                      class="chakra-icon css-onkibi"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M21,5H3C2.621,5,2.275,5.214,2.105,5.553C1.937,5.892,1.973,6.297,2.2,6.6l9,12 c0.188,0.252,0.485,0.4,0.8,0.4s0.611-0.148,0.8-0.4l9-12c0.228-0.303,0.264-0.708,0.095-1.047C21.725,5.214,21.379,5,21,5z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label
+                class="chakra-form__label css-uvho5g"
+                for="bucketc"
+                id="field-:r0:-label"
+              >
+                Bucket C
+              </label>
+              <div
+                class="chakra-numberinput css-e69dqy"
+              >
+                <input
+                  aria-readonly="false"
+                  aria-required="false"
+                  aria-valuemax="9007199254740991"
+                  aria-valuemin="-9007199254740991"
+                  autocomplete="off"
+                  autocorrect="off"
+                  class="chakra-numberinput__field css-8atqhb"
+                  id="field-:r0:"
+                  inputmode="decimal"
+                  name="bucketc"
+                  pattern="[0-9]*(.[0-9]+)?"
+                  role="spinbutton"
+                  type="text"
+                  value=""
+                />
+                <div
+                  aria-hidden="true"
+                  class="css-1j80trz"
+                >
+                  <div
+                    class="css-8bep6f"
+                    role="button"
+                    tabindex="-1"
+                  >
+                    <svg
+                      class="chakra-icon css-onkibi"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12.8,5.4c-0.377-0.504-1.223-0.504-1.6,0l-9,12c-0.228,0.303-0.264,0.708-0.095,1.047 C2.275,18.786,2.621,19,3,19h18c0.379,0,0.725-0.214,0.895-0.553c0.169-0.339,0.133-0.744-0.095-1.047L12.8,5.4z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    class="css-8bep6f"
+                    role="button"
+                    tabindex="-1"
+                  >
+                    <svg
+                      class="chakra-icon css-onkibi"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M21,5H3C2.621,5,2.275,5.214,2.105,5.553C1.937,5.892,1.973,6.297,2.2,6.6l9,12 c0.188,0.252,0.485,0.4,0.8,0.4s0.611-0.148,0.8-0.4l9-12c0.228-0.303,0.264-0.708,0.095-1.047C21.725,5.214,21.379,5,21,5z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            class="chakra-button css-67o9j4"
+            type="submit"
+          >
+            Solve for C
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 `;

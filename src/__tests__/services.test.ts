@@ -13,31 +13,37 @@ describe('calculateSteps()', () => {
     const result = calculateSteps(3, 5, 4);
     expect(result).toEqual([
       {
+        id: expect.any(String),
         containerA: 0,
         containerB: 5,
         desc: FILL_B,
       },
       {
+        id: expect.any(String),
         containerA: 3,
         containerB: 2,
         desc: POUR_INTO_A,
       },
       {
+        id: expect.any(String),
         containerA: 0,
         containerB: 2,
         desc: EMPTY_A,
       },
       {
+        id: expect.any(String),
         containerA: 2,
         containerB: 0,
         desc: POUR_INTO_A,
       },
       {
+        id: expect.any(String),
         containerA: 2,
         containerB: 5,
         desc: FILL_B,
       },
       {
+        id: expect.any(String),
         containerA: 3,
         containerB: 4,
         desc: POUR_INTO_A,
@@ -49,21 +55,25 @@ describe('calculateSteps()', () => {
     const result = calculateSteps(1, 10, 2);
     expect(result).toEqual([
       {
+        id: expect.any(String),
         containerA: 1,
         containerB: 0,
         desc: FILL_A,
       },
       {
+        id: expect.any(String),
         containerA: 0,
         containerB: 1,
         desc: POUR_INTO_B,
       },
       {
+        id: expect.any(String),
         containerA: 1,
         containerB: 1,
         desc: FILL_A,
       },
       {
+        id: expect.any(String),
         containerA: 0,
         containerB: 2,
         desc: POUR_INTO_B,

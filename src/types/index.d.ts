@@ -1,6 +1,6 @@
 interface ISteps {
-    containerA: number;
-    containerB: number;
-    desc: string;
+  id: string;
+  containerA: number;
+  containerB: number;
+  desc: string;
 }
-
